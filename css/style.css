@@ -1,56 +1,109 @@
 
-
+/* palette
+92BDA3 muted teal
+A1BA89 muted olive
+A5CC6B willow green
+806D40 olive wood
+382633 midnight violet
+ */
 
 
 body{
 
-min-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
-margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-color: #A1BA89;
 }
 
 #mainContainer {
-
 
     width: 800px;
     height: 600px;
     display: flex;
     align-items: stretch;
     justify-content: center;
-    background-color: aqua;
+    background-color: #382633;
     flex-direction: column;
 }
 
 #infoPanel {
-width: 100%;
-height: 100px;
-background-color: blue;
+    width: 100%;
+    height: 100px;
+    background-color: #806D40;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
 
-#leftWeight{
+.infoLabel{
+    font-weight: bold;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #382633d0;
+}
+
+.infoValue{
+    color: white;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: lighter;
 
 }
-#rightWeight{
-
+.infoItem{
+    display: flex;
+    flex-direction: column;
+    background-color: #92BDA3;
+    box-shadow: 5px 5px  #382633;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+    width: 150px;
+    height: 50px;
 }
-
+.infoItem:hover{
+        display: flex;
+        flex-direction: column;
+        background-color: #92BDA3;
+        box-shadow: 2px 2px #382633;
+        align-items: center;
+        padding: 5px;
+        border-radius: 5px;
+        width: 148px;
+        height: 48px;
+ }
 
 #seesawContainer{
-flex: 1;
-
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #A5CC6B;
 }
 
 #completeSeesaw{
-
-
-}
-#seesawPivot{
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
 }
 
 #seesawPlank {
+
+    width: 500px;
+    height: 20px;
+    background-color: #806D40;
+    border-radius: 4px;
+}
+
+#seesawPivot {
+
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent ;
+    border-right: 20px solid transparent;
+    border-bottom: 40px  solid #382633;
+
 
 }
