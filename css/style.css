@@ -1,15 +1,33 @@
 
+
+
+
+body{
+
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 0;
+}
+
 #mainContainer {
 
 
     width: 800px;
-    height: 500px;
+    height: 600px;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     background-color: aqua;
+    flex-direction: column;
 }
 
+#infoPanel {
+width: 100%;
+height: 100px;
+background-color: blue;
+}
 
 #leftWeight{
 
@@ -18,12 +36,9 @@
 
 }
 
-#infoPanel{
-
-}
 
 #seesawContainer{
-
+flex: 1;
 
 }
 
