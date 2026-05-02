@@ -81,6 +81,7 @@ body{
     justify-content: center;
     align-items: center;
     background-color: #A5CC6B;
+   
 }
 
 #completeSeesaw{
@@ -96,6 +97,7 @@ body{
     height: 20px;
     background-color: #806D40;
     border-radius: 4px;
+    position: relative;
 }
 
 #seesawPivot {
