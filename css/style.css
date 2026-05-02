@@ -83,11 +83,16 @@ body{
     background-color: #A5CC6B;
    
 }
-
+#seesawObject {
+align-items: center;
+}
 #completeSeesaw{
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 500px;
+    height: 200px;
+    justify-content: center;
 
 }
 
