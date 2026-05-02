@@ -1,0 +1,41 @@
+
+#mainContainer {
+
+
+    width: 800px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: aqua;
+}
+
+
+#leftWeight{
+
+}
+#rightWeight{
+
+}
+
+#infoPanel{
+
+}
+
+#seesawContainer{
+
+
+}
+
+#completeSeesaw{
+
+
+}
+#seesawPivot{
+
+
+}
+
+#seesawPlank {
+
+}
