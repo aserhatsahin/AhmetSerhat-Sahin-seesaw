@@ -33,7 +33,20 @@ function initState() {
 
     updateInfoPanel(totalLeftWeight, totalRightWeight, nextWeight, angle);
 
-  }               
+  }      
+
+function resetSeesaw(){
+    leftObjects = [];
+    rightObjects = [];
+    localStorage.clear();
+     document.getElementById("seesawPlank").innerHTML = "<span>SERHAT'S SEESAW</span>";
+    rotatePlank(0);
+    updateInfoPanel(0,0, nextWeight, 0);
+
+}
+
+document.getElementById("resetButton").addEventListener("click",resetSeesaw);
+
 function createObject(clickX){
   
     const side = clickX < 250 ? "left" : "right";

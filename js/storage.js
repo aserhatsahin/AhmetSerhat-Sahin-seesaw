@@ -12,5 +12,11 @@ function saveState(leftObjects, rightObjects){
           leftObjects: left ? JSON.parse(left) : [],
           rightObjects: right ? JSON.parse(right) : []                                                                 
       };                                                    
-  }                                                                                                                    
+  }                                                                                                       
+function resetState(){
+   const left = localStorage.getItem("leftObjects");     
+   const right = localStorage.getItem("rightObjects");
+
+    left
+}             
    export{ saveState, loadState };
