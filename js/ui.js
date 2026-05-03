@@ -48,5 +48,41 @@ function updateInfoPanel(totalLeftWeight, totalRightWeight, nextWeight, angle){
 
 }
 
+function createPreviewObject(object){
+    const div = document.createElement("div");
 
-export { addObjectToSeesaw, rotatePlank ,updateInfoPanel};
+    div.className = "previewObject";
+
+    div.style.borderRadius = "50%";
+
+    div.textContent = object.weight + "kg";
+    div.style.position = "absolute";
+
+    div.style.backgroundColor = object.color;
+    div.style.width = object.size + "px";
+    div.style.height = object.size + "px";
+    div.style.top = -object.size + "px"; 
+
+    div.style.opacity = "0.4";
+
+
+    document.getElementById("completeSeesaw").appendChild(div);
+    return div;
+}
+
+
+function movePreview(previewDiv, clickX, size){
+
+    previewDiv.style.left = clickX - (size/2) + "px";
+    previewDiv.style.top = (90 - size) + "px";
+}
+
+ function updatePreview(previewDiv, weight, size, color) {                                                            
+      previewDiv.textContent = weight + "kg";               
+      previewDiv.style.width = size + "px";                                                                            
+      previewDiv.style.height = size + "px";
+      previewDiv.style.backgroundColor = color;                                                                        
+      previewDiv.style.top = (90 - size) + "px";            
+  }         
+
+export { addObjectToSeesaw, rotatePlank ,updateInfoPanel,createPreviewObject,movePreview,updatePreview};

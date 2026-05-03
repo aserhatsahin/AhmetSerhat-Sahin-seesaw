@@ -1,10 +1,15 @@
 
 import  {calculateTorque,calculateAngle} from "./seesaw.js";
-import  {addObjectToSeesaw,rotatePlank,updateInfoPanel} from "./ui.js";
+import  {addObjectToSeesaw,rotatePlank,updateInfoPanel,createPreviewObject,movePreview,updatePreview} from "./ui.js";
 
 let leftObjects = [];
 let rightObjects = [];
 let nextWeight = Math.floor(Math.random()*10) + 1;
+
+
+let nextSize = 20 + (nextWeight * 5);
+let nextColor = `hsl(${Math.random() * 360}, 60%, 50%)`;                                             
+let previewDiv = createPreviewObject({ weight: nextWeight, size: nextSize, color: nextColor });
 
 
 function createObject(clickX){
@@ -17,10 +22,12 @@ function createObject(clickX){
  
     const weight = nextWeight;
     nextWeight = Math.floor(Math.random()*10 ) + 1 ;
-
-   
-    const color =`hsl(${Math.random() * 360}, 60%, 50%)`;
-
+                                                                           
+                                      
+  
+    const color = nextColor;
+    nextColor = `hsl(${Math.random() * 360}, 60%, 50%)`;
+    nextSize = 20 + (nextWeight * 5);            
     const size = 20 + (weight * 5); 
         
     const object = {
@@ -30,6 +37,7 @@ function createObject(clickX){
     color:color,
     size:size
     }
+
 
     return object;
 }
@@ -67,6 +75,7 @@ function updateState(object){
 }
 
 
+
 function updateUI(object, angle, totalLeft, totalRight  ){
 
     addObjectToSeesaw(object);
@@ -75,11 +84,12 @@ function updateUI(object, angle, totalLeft, totalRight  ){
 
     updateInfoPanel(totalLeft,totalRight,nextWeight,angle)
 
+  
+    updatePreview(previewDiv, nextWeight, nextSize, nextColor);  
 }
 
 document.getElementById("completeSeesaw").addEventListener("click", (event)=> {
 
-    
       const object = createObject(event.offsetX);                                                                            
       const { angle, totalLeftWeight, totalRightWeight } = updateState(object);
       updateUI(object, angle, totalLeftWeight, totalRightWeight);      
@@ -87,7 +97,14 @@ document.getElementById("completeSeesaw").addEventListener("click", (event)=> {
 });
 
 
+document.getElementById("completeSeesaw").addEventListener("mousemove", (event) => {
 
+
+movePreview(previewDiv, event.offsetX, nextSize);    
+
+
+
+});
 
 
 
