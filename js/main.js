@@ -1,5 +1,6 @@
 
 import  {calculateTorque,calculateAngle} from "./seesaw.js";
+import  {saveState,loadState} from "./storage.js";
 import  {addObjectToSeesaw,rotatePlank,updateInfoPanel,createPreviewObject,movePreview,updatePreview} from "./ui.js";
 
 let leftObjects = [];
@@ -11,7 +12,28 @@ let nextSize = 20 + (nextWeight * 5);
 let nextColor = `hsl(${Math.random() * 360}, 60%, 50%)`;                                             
 let previewDiv = createPreviewObject({ weight: nextWeight, size: nextSize, color: nextColor });
 
+initState();
 
+function initState() {                                                                                               
+    const saved = loadState();
+    leftObjects = saved.leftObjects;
+    rightObjects = saved.rightObjects;
+
+    leftObjects.forEach(obj => addObjectToSeesaw(obj));
+    rightObjects.forEach(obj => addObjectToSeesaw(obj));
+
+    const leftTorque = calculateTorque(leftObjects);
+    const rightTorque = calculateTorque(rightObjects);
+    const angle = calculateAngle(leftTorque, rightTorque);
+
+    rotatePlank(angle);
+
+    const totalLeftWeight = leftObjects.reduce((sum, o) => sum + o.weight, 0);
+    const totalRightWeight = rightObjects.reduce((sum, o) => sum + o.weight, 0);
+
+    updateInfoPanel(totalLeftWeight, totalRightWeight, nextWeight, angle);
+
+  }               
 function createObject(clickX){
   
     const side = clickX < 250 ? "left" : "right";
@@ -46,6 +68,7 @@ function updateState(object){
 
         // console.log(object.size);  
 
+
     if (object.side === "left"){
 
         leftObjects.push(object);
@@ -71,6 +94,7 @@ function updateState(object){
 
     const angle = calculateAngle(leftTorque,rightTorque);
 
+    saveState(leftObjects, rightObjects);
     return { angle, totalLeftWeight, totalRightWeight };
 }
 
@@ -80,14 +104,14 @@ function updateUI(object, angle, totalLeft, totalRight  ){
 
     addObjectToSeesaw(object);
 
-setTimeout( () => { 
+    setTimeout( () => { 
 
-  rotatePlank(angle);
+        rotatePlank(angle);
 
-  updateInfoPanel(totalLeft,totalRight,nextWeight,angle)
+        updateInfoPanel(totalLeft,totalRight,nextWeight,angle)
 
-  
-},600);
+    
+    },600);
 
   
     updatePreview(previewDiv, nextWeight, nextSize, nextColor);  
@@ -95,9 +119,9 @@ setTimeout( () => {
 
 document.getElementById("completeSeesaw").addEventListener("click", (event)=> {
 
-      const object = createObject(event.offsetX);                                                                            
-      const { angle, totalLeftWeight, totalRightWeight } = updateState(object);
-      updateUI(object, angle, totalLeftWeight, totalRightWeight);      
+    const object = createObject(event.offsetX);                                                                       
+    const { angle, totalLeftWeight, totalRightWeight } = updateState(object);
+    updateUI(object, angle, totalLeftWeight, totalRightWeight);      
     
 });
 
