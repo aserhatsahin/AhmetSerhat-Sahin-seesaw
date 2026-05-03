@@ -103,7 +103,7 @@ body{
 }
 
 #seesawPlank {
-
+    transition: transform 0.7s ease;
     width: 500px;
     height: 20px;
     background-color: #806D40;
