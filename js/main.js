@@ -4,26 +4,25 @@ import  {addObjectToSeesaw,rotatePlank,updateInfoPanel} from "./ui.js";
 
 let leftObjects = [];
 let rightObjects = [];
+let nextWeight = Math.floor(Math.random()*10) + 1;
 
 
-document.getElementById("completeSeesaw").addEventListener("click", (event)=> {
-
-   
-    const clickX = event.offsetX;
-
+function createObject(clickX){
+  
     const side = clickX < 250 ? "left" : "right";
 
 
     const distance = Math.abs(clickX - 250);
 
-
-    const weight = Math.floor(Math.random()*10) + 1;
+ 
+    const weight = nextWeight;
+    nextWeight = Math.floor(Math.random()*10 ) + 1 ;
 
    
     const color =`hsl(${Math.random() * 360}, 60%, 50%)`;
 
-    const size = 20 + (weight * 5) + "px"; 
-
+    const size = 20 + (weight * 5); 
+        
     const object = {
     weight:weight,
     distance:distance,
@@ -32,28 +31,21 @@ document.getElementById("completeSeesaw").addEventListener("click", (event)=> {
     size:size
     }
 
+    return object;
+}
 
+function updateState(object){
 
-    if (side === "left"){
+        // console.log(object.size);  
+
+    if (object.side === "left"){
 
         leftObjects.push(object);
 
     }else{
 
         rightObjects.push(object);
-
     }
-
-    const leftTorque = calculateTorque(leftObjects);
-
-    const rightTorque = calculateTorque(rightObjects);
-
-    const angle = calculateAngle(leftTorque,rightTorque);
-
-    addObjectToSeesaw(object);
-
-    rotatePlank(angle);
-
     let totalLeftWeight=0;
     let totalRightWeight=0;
 
@@ -65,8 +57,33 @@ document.getElementById("completeSeesaw").addEventListener("click", (event)=> {
         totalRightWeight += object.weight;
     });
 
+    const leftTorque = calculateTorque(leftObjects);
 
-    updateInfoPanel(totalLeftWeight,totalRightWeight,weight,angle)
+    const rightTorque = calculateTorque(rightObjects);
+
+    const angle = calculateAngle(leftTorque,rightTorque);
+
+    return { angle, totalLeftWeight, totalRightWeight };
+}
+
+
+function updateUI(object, angle, totalLeft, totalRight  ){
+
+    addObjectToSeesaw(object);
+
+    rotatePlank(angle);
+
+    updateInfoPanel(totalLeft,totalRight,nextWeight,angle)
+
+}
+
+document.getElementById("completeSeesaw").addEventListener("click", (event)=> {
+
+    
+      const object = createObject(event.offsetX);                                                                            
+      const { angle, totalLeftWeight, totalRightWeight } = updateState(object);
+      updateUI(object, angle, totalLeftWeight, totalRightWeight);      
+    
 });
 
 

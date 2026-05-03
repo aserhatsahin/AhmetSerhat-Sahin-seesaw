@@ -10,19 +10,19 @@ function addObjectToSeesaw(object){
     div.style.position = "absolute";
 
     div.style.backgroundColor = object.color;
-    div.style.width = object.size;
-    div.style.height = object.size;
+    div.style.width = object.size + "px";
+    div.style.height = object.size + "px";
+    div.style.top = -object.size + "px"; 
+                                              
 
-
-    div.style.borderRadius = "50%";
 
     if(object.side === "left"){
 
-        div.style.left = 250 - object.distance + "px";
+        div.style.left = (250 - object.distance) - (object.size/2) + "px";
     }
     else{
 
-        div.style.left = 250 + object.distance + "px";
+        div.style.left = (250 + object.distance) - (object.size/2) + "px";
 
     }
    
