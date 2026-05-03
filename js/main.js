@@ -80,9 +80,14 @@ function updateUI(object, angle, totalLeft, totalRight  ){
 
     addObjectToSeesaw(object);
 
-    rotatePlank(angle);
+setTimeout( () => { 
 
-    updateInfoPanel(totalLeft,totalRight,nextWeight,angle)
+  rotatePlank(angle);
+
+  updateInfoPanel(totalLeft,totalRight,nextWeight,angle)
+
+  
+},600);
 
   
     updatePreview(previewDiv, nextWeight, nextSize, nextColor);  

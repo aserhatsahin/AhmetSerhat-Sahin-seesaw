@@ -31,6 +31,7 @@ body{
 }
 
 #infoPanel {
+
     width: 100%;
     height: 100px;
     background-color: #806D40;
@@ -47,12 +48,14 @@ body{
 }
 
 .infoValue{
+
     color: white;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: lighter;
 
 }
 .infoItem{
+
     display: flex;
     flex-direction: column;
     background-color: #92BDA3;
@@ -62,20 +65,24 @@ body{
     border-radius: 5px;
     width: 150px;
     height: 50px;
+
 }
 .infoItem:hover{
-        display: flex;
-        flex-direction: column;
-        background-color: #92BDA3;
-        box-shadow: 2px 2px #382633;
-        align-items: center;
-        padding: 5px;
-        border-radius: 5px;
-        width: 148px;
-        height: 48px;
+
+    display: flex;
+    flex-direction: column;
+    background-color: #92BDA3;
+    box-shadow: 2px 2px #382633;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+    width: 148px;
+    height: 48px;
+
  }
 
 #seesawContainer{
+
     flex: 1;
     display: flex;
     justify-content: center;
@@ -85,6 +92,7 @@ body{
    
 }
 .seesawObject {
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -93,8 +101,11 @@ body{
     border-radius: 50%;
     border: 1px solid #dfdbde8a;
     transition: top 0.6s ease-in;
+    box-shadow: 0.5px 0.5px #382633;
+
 }
 #completeSeesaw{
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -106,21 +117,32 @@ body{
 }
 
 .previewObject {
+
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: white;   
+
 }
 
 #seesawPlank {
+
     transition: transform 0.7s ease;
     width: 500px;
     height: 20px;
     background-color: #806D40;
     border-radius: 4px;
     position: relative;
+    box-shadow: 0.5px 4px #2c1e01;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+
+
 }
 
 #seesawPivot {
