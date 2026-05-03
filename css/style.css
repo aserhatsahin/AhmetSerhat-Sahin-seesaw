@@ -81,6 +81,7 @@ body{
     justify-content: center;
     align-items: center;
     background-color: #A5CC6B;
+    position: relative;
    
 }
 .seesawObject {
@@ -91,6 +92,7 @@ body{
     color: white;
     border-radius: 50%;
     border: 1px solid #dfdbde8a;
+    transition: top 0.6s ease-in;
 }
 #completeSeesaw{
     display: flex;

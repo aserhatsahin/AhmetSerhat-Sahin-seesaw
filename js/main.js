@@ -100,7 +100,7 @@ document.getElementById("completeSeesaw").addEventListener("click", (event)=> {
 document.getElementById("completeSeesaw").addEventListener("mousemove", (event) => {
 
 
-movePreview(previewDiv, event.offsetX, nextSize);    
+        movePreview(previewDiv, event.offsetX, nextSize);    
 
 
 
