@@ -22,17 +22,8 @@ function initState() {
     leftObjects.forEach(obj => addObjectToSeesaw(obj));
     rightObjects.forEach(obj => addObjectToSeesaw(obj));
 
-    const leftTorque = calculateTorque(leftObjects);
-    const rightTorque = calculateTorque(rightObjects);
-    const angle = calculateAngle(leftTorque, rightTorque);
-
-    rotatePlank(angle);
-
-    const totalLeftWeight = leftObjects.reduce((sum, o) => sum + o.weight, 0);
-    const totalRightWeight = rightObjects.reduce((sum, o) => sum + o.weight, 0);
-
-    updateInfoPanel(totalLeftWeight, totalRightWeight, nextWeight, angle);
-
+    const { angle, totalLeftWeight, totalRightWeight } = computeSimulation();
+    refreshUI(angle, totalLeftWeight, totalRightWeight);
   }      
 
 function resetSeesaw(){
@@ -51,14 +42,10 @@ function createObject(clickX){
   
     const side = clickX < 250 ? "left" : "right";
 
-
     const distance = Math.abs(clickX - 250);
 
- 
     const weight = nextWeight;
-    nextWeight = Math.floor(Math.random()*10 ) + 1 ;
-                                                                           
-                                      
+    nextWeight = Math.floor(Math.random()*10 ) + 1 ;                 
   
     const color = nextColor;
     nextColor = `hsl(${Math.random() * 360}, 60%, 50%)`;
@@ -90,25 +77,9 @@ function updateState(object){
 
         rightObjects.push(object);
     }
-    let totalLeftWeight=0;
-    let totalRightWeight=0;
-
-    leftObjects.forEach((object)=> {
-        totalLeftWeight += object.weight;
-    });
-
-    rightObjects.forEach((object)=> {
-        totalRightWeight += object.weight;
-    });
-
-    const leftTorque = calculateTorque(leftObjects);
-
-    const rightTorque = calculateTorque(rightObjects);
-
-    const angle = calculateAngle(leftTorque,rightTorque);
-
-    saveState(leftObjects, rightObjects);
-    return { angle, totalLeftWeight, totalRightWeight };
+    const result = computeSimulation();
+    saveState(leftObjects,rightObjects);
+    return result;
 }
 
 
@@ -119,14 +90,11 @@ function updateUI(object, angle, totalLeft, totalRight  ){
 
     setTimeout( () => { 
 
-        rotatePlank(angle);
-
-        updateInfoPanel(totalLeft,totalRight,nextWeight,angle)
+        refreshUI(angle,totalLeft,totalRight);
 
     
     },600);
 
-  
     updatePreview(previewDiv, nextWeight, nextSize, nextColor);  
 }
 
@@ -148,6 +116,23 @@ document.getElementById("completeSeesaw").addEventListener("mousemove", (event) 
 
 });
 
+function computeSimulation() {                                                                                                 
+      const leftTorque = calculateTorque(leftObjects);
+      const rightTorque = calculateTorque(rightObjects);                                                                         
+      const angle = calculateAngle(leftTorque, rightTorque);
+                                                                                                                                 
+      let totalLeftWeight = 0;                              
+      let totalRightWeight = 0;
+      leftObjects.forEach(o => totalLeftWeight += o.weight);
+      rightObjects.forEach(o => totalRightWeight += o.weight);
+                                                                                                                                 
+      return { angle, totalLeftWeight, totalRightWeight };
+  }      
 
+
+ function refreshUI(angle, totalLeftWeight, totalRightWeight) {                                                                 
+      rotatePlank(angle);
+      updateInfoPanel(totalLeftWeight, totalRightWeight, nextWeight, angle);                                                     
+  }   
 
 
